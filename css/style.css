@@ -21,10 +21,35 @@ body {
 .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;
-    width: 25%;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
     padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+left {
+    left: 0;
+    width: 25%;
+}
+
+.map-overlay h5,
+.map-overlay p {
+    color: white;
+    margin: 2px;
+}
+
+.global-confirmed,
+.country-confirmed, .covid-chart, .death-recovered {
+    background: black;
+    opacity: 0.8;
+    padding: 10px;
+    color: white;
+}
+
+.global-confirmed-number {
+    color: red;
+    font-size: 3vw;
+    padding: 20px 0;
 }
 
 .map-overlay .legend .bar {
@@ -70,4 +95,52 @@ body {
 #container {
     height: 100%;
     width: 100%;
+}
+
+.country-confirmed {
+    margin-top: 5px;
+    height: 250px;
+    overflow-y: auto;
+}
+
+.country-confirmed-number div, .country-death-recovered div {
+    text-align: right;
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.country-confirmed-number div {
+    border-bottom: 1px white solid;
+}
+
+.country-death-recovered div {
+    border-bottom: 1px grey solid;
+}
+
+.country-confirmed-number span {
+    color: red;
+    font-weight: bold;
+}
+
+.right {
+    width: 30%;
+    right: 10px;
+    bottom: 10px;
+}
+
+.death-recovered {
+    height: 200px;
+}
+
+.covid-chart {
+    margin-top: 5px;
+    height: 150px;
+}
+
+span.recovered {
+    color: green;
+}
+
+.global-death-recovered span {
+    font-size: 2vw;
 }
