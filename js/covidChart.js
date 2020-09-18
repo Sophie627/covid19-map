@@ -29,8 +29,8 @@ var chart = new Chart(ctx, {
         labels: covidDate.reverse(),
         datasets: [{
             label: "Daily Cases",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 170, 0)',
+            borderColor: 'rgb(255, 170, 0)',
             //Insert data points here (y-axis)
             data: covidConfirmed.reverse(),
         }]
