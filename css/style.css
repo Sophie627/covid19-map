@@ -102,8 +102,15 @@ left {
 .country-confirmed,
 .country-death-recovered {
     margin-top: 5px;
-    height: 250px;
     overflow-y: auto;
+}
+
+.country-confirmed {
+    height: 250px;
+}
+
+.country-death-recovered {
+    height: 150px;
 }
 
 .country-confirmed-number div,
