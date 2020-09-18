@@ -2,7 +2,7 @@ var covidSummary;
 $.ajax({
     type: "GET",
     url: "https://api.covid19api.com/summary",
-    success: function (data) {
+    success: function(data) {
         covidSummary = data;
     },
     async: false,
@@ -20,24 +20,23 @@ var countrySummary = covidSummary.Countries;
 
 function compare(a, b) {
 
-  let comparison = 0;
-  if (a.TotalConfirmed > b.TotalConfirmed) {
-    comparison = -1;
-  } else if (a.TotalConfirmed < b.TotalConfirmed) {
-    comparison = 1;
-  }
-  return comparison;
+    let comparison = 0;
+    if (a.TotalConfirmed > b.TotalConfirmed) {
+        comparison = -1;
+    } else if (a.TotalConfirmed < b.TotalConfirmed) {
+        comparison = 1;
+    }
+    return comparison;
 }
 
 countrySummary.sort(compare);
-console.log(countrySummary);
 
-var countryConfirmedHtml ='';
+var countryConfirmedHtml = '';
 var countryDeathRecoveryHtml = '';
 
 countrySummary.forEach((element) => {
-    countryConfirmedHtml += '<div><span>' + element.TotalConfirmed + '</span> ' + element.Country + '</div>';
-    countryDeathRecoveryHtml += '<div><span class="death">' + element.TotalDeaths + '</span> deaths, <span class="recovered">' + element.TotalRecovered + ' recovered</span> ' + element.Country + '</div>';
+    countryConfirmedHtml += '<div><span>' + numberWithCommas(element.TotalConfirmed) + '</span> ' + element.Country + '</div>';
+    countryDeathRecoveryHtml += '<div><span class="death">' + numberWithCommas(element.TotalDeaths) + '</span> deaths, <span class="recovered">' + numberWithCommas(element.TotalRecovered) + ' recovered</span> ' + element.Country + '</div>';
 });
 
 $('.country-confirmed-number').html(countryConfirmedHtml);

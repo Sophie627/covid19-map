@@ -39,7 +39,9 @@ left {
 }
 
 .global-confirmed,
-.country-confirmed, .covid-chart, .death-recovered {
+.country-confirmed,
+.covid-chart,
+.death-recovered {
     background: black;
     opacity: 0.8;
     padding: 10px;
@@ -97,13 +99,15 @@ left {
     width: 100%;
 }
 
-.country-confirmed, .country-death-recovered {
+.country-confirmed,
+.country-death-recovered {
     margin-top: 5px;
     height: 250px;
     overflow-y: auto;
 }
 
-.country-confirmed-number div, .country-death-recovered div {
+.country-confirmed-number div,
+.country-death-recovered div {
     text-align: right;
     padding: 5px 20px;
     font-size: 16px;
@@ -130,7 +134,7 @@ left {
 
 .covid-chart {
     margin-top: 5px;
-    height: 150px;
+    height: 250px;
 }
 
 span.recovered {

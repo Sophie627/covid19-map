@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>COVID-19 MAP</title>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
 
-<div id="map"></div>
+    <div id="map"></div>
 
-<div class="map-overlay left">
-    <div class="global-confirmed">
-        <h5>Global Cases</h5>
-        <div class="global-confirmed-number"></div>
-    </div>
-    <div class="country-confirmed">
-        <p>Cased by</p>
-        <p>Country/Region/Sovereignty</p>
-        <div class="country-confirmed-number">
+    <div class="map-overlay left">
+        <div class="global-confirmed">
+            <h5>Global Cases</h5>
+            <div class="global-confirmed-number"></div>
+        </div>
+        <div class="country-confirmed">
+            <p>Cased by</p>
+            <p>Country/Region/Sovereignty</p>
+            <div class="country-confirmed-number">
+            </div>
         </div>
     </div>
-</div>
 
-<div class="map-overlay right">
-    <div class="death-recovered">
-        <h5>Global</h5>
-        <div class="global-death-recovered">
-            <span class="death"></span> deaths, <span class="recovered"></span> recovered
+    <div class="map-overlay right">
+        <div class="death-recovered">
+            <h5>Global</h5>
+            <div class="global-death-recovered">
+                <span class="death"></span> deaths, <span class="recovered"></span> recovered
+            </div>
+            <div class="country-death-recovered">
+            </div>
         </div>
-        <div class="country-death-recovered">
+        <div class="covid-chart">
+            <canvas id="covid-chart"></canvas>
         </div>
     </div>
-    <div class="covid-chart"></div>
-</div>
 
 
-        <!--
+    <!--
         <div class="map-overlay top">
           <h1 style="color: aqua">nCov19 and Economy Variation Map...</h1>
           <h5 style="color: red">SPX Index </h5>
@@ -64,7 +69,9 @@
           </div>
         </div>
         -->
-        <script src="js/main.js"></script>
-        <script src="js/covidSummary.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/covidChart.js"></script>
+    <script src="js/covidSummary.js"></script>
 </body>
+
 </html>
