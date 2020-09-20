@@ -1,9 +1,3 @@
-$(window).on('load', function() { // makes sure the whole site is loaded 
-    $('#status').fadeOut(); // will first fade out the loading animation 
-    $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
-    $('body').delay(350).css({ 'overflow': 'visible' });
-});
-
 //Get current date
 var yesterday = new Date();
 var dd = String(yesterday.getDate() - 1).padStart(2, '0');
@@ -210,6 +204,10 @@ map.on('load', function() {
         var Dateind = parseInt(e.target.value, 10);
         filterBy(Dateind);
     });
+
+    $('#status').fadeOut(); // will first fade out the loading animation 
+    $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+    $('body').delay(350).css({ 'overflow': 'visible' });
 
     map.rotateTo(10, { duration: 15000 });
 
