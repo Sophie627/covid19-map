@@ -1,6 +1,38 @@
 body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
+}
+
+
+/* Preloader */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    /* change if the mask should have another color then white */
+    z-index: 99;
+    /* makes sure it stays on top */
+}
+
+#status {
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    left: 50%;
+    /* centers the loading animation horizontally one the screen */
+    top: 50%;
+    /* centers the loading animation vertically one the screen */
+    background-image: url(../preload.gif);
+    /* path to your loading animation */
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -100px 0 0 -100px;
+    /* is width and height divided by two */
 }
 
 #map {
@@ -150,4 +182,23 @@ span.recovered {
 
 .global-death-recovered span {
     font-size: 2vw;
+}
+
+.slider {
+    background: white;
+    opacity: 0.6;
+    width: 30%;
+    left: 50%;
+    margin-left: -15%;
+    text-align: left;
+}
+
+.slider h3,
+.slider p {
+    color: black;
+    padding: 5px 20px 0;
+}
+
+.slider h3 {
+    font-size: 18px;
 }

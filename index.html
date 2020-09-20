@@ -13,6 +13,12 @@
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+        <img width="100%" src='https://unsplash.it/3000/3000/?random' />
+    </div>
+
 
     <div id="map"></div>
 
@@ -43,6 +49,12 @@
         </div>
     </div>
 
+    <div class="map-overlay slider">
+        <h3>Preview by Date</h3>
+        <p id="Date">2020-09-18</p>
+        <input id="slider" type="range" min="0" max="239" step="1" value="0" />
+    </div>
+
 
     <!--
         <div class="map-overlay top">
@@ -59,7 +71,6 @@
           <div class="map-overlay-inner">
             <h2>Preview by Date</h2>
             <label id="Date"></label>
-            <input id="slider" type="range" min="0" max="62" step="1" value="0" />
           </div>
           <div class="map-overlay-inner">
             <div id="legend" class="legend">
