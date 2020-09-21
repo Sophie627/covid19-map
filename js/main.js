@@ -1,15 +1,15 @@
 //Get current date
 var yesterday = new Date();
-var dd = String(yesterday.getDate() - 1).padStart(2, '0');
-var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = yesterday.getFullYear();
+// var dd = String(yesterday.getDate() - 2).padStart(2, '0');
+// var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+// var yyyy = yesterday.getFullYear();
 
-yesterday = yyyy + '-' + mm + '-' + dd;
+// yesterday = yyyy + '-' + mm + '-' + dd;
 
 var monthDay = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 var Dates = [];
-for (var d = new Date(2020, 9, 18); d >= new Date(2020, 1, 22); d.setDate(d.getDate() - 1)) {
+for (var d = new Date(yesterday.getFullYear(), yesterday.getMonth() + 1, yesterday.getDate() - 2); d >= new Date(2020, 1, 22); d.setDate(d.getDate() - 1)) {
     month = '' + (d.getMonth());
     day = '' + d.getDate();
     year = d.getFullYear();
@@ -74,6 +74,8 @@ map.on('load', function() {
             "name": 'covid',
             "features": [],
         };
+
+        console.log(covidData);
 
         JSON.parse(covidData).forEach(element => {
             if (element.lon != 0 || element.lat != 0) {

@@ -1,0 +1,1 @@
+D:\xampp\php\php.exe D:\xampp\htdocs\covid19-map\cron.php

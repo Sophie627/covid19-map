@@ -34,10 +34,10 @@ countrySummary.sort(compare);
 var countryConfirmedHtml = '';
 var countryDeathRecoveryHtml = '';
 
-countrySummary.forEach((element) => {
-    countryConfirmedHtml += '<div><span>' + numberWithCommas(element.TotalConfirmed) + '</span> ' + element.Country + '</div>';
-    countryDeathRecoveryHtml += '<div><span class="death">' + numberWithCommas(element.TotalDeaths) + '</span> deaths, <span class="recovered">' + numberWithCommas(element.TotalRecovered) + ' recovered</span> ' + element.Country + '</div>';
-});
+// countrySummary.forEach((element) => {
+//     countryConfirmedHtml += '<div><span>' + numberWithCommas(element.TotalConfirmed) + '</span> ' + element.Country + '</div>';
+//     countryDeathRecoveryHtml += '<div><span class="death">' + numberWithCommas(element.TotalDeaths) + '</span> deaths, <span class="recovered">' + numberWithCommas(element.TotalRecovered) + ' recovered</span> ' + element.Country + '</div>';
+// });
 
 $('.country-confirmed-number').html(countryConfirmedHtml);
 $('.country-death-recovered').html(countryDeathRecoveryHtml);
