@@ -3,10 +3,7 @@
 
     $day = date('Y-m-d',strtotime("-2 days"));
 
-    // echo date("Y-m-d");
-    $sql = "SELECT confirmed, lat, lon, `date` FROM covid_data";
-    // $sql = "SELECT confirmed, lat, lon FROM covid_data WHERE `date` >= '$day 00:00:00'";
-    // echo $sql;exit;
+    $sql = "SELECT confirmed, lat, lon, `date` FROM covid_data WHERE `countryCode` != 'US'";
     $result = $conn->query($sql);
 
     $array = array();

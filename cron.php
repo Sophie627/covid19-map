@@ -1,9 +1,9 @@
 <?php
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "coviddata";
-
+    $username = "u331773922_root";
+    $password = "Tkwdlrfjkaj627";
+    $dbname = "u331773922_coviddata";
+    
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
@@ -12,7 +12,7 @@
     }
 
     $yesterday = date('Y-m-d',strtotime("-1 days"));
-
+    // $yesterday = '2020-10-06';
     $countries = CallAPI("GET", "https://api.covid19api.com/countries");
     $countries = json_decode($countries); 
 
@@ -20,6 +20,7 @@
         $slug =  $country->Slug;
         $covidData = CallAPI("GET", "https://api.covid19api.com/country/". $slug. "?from=". $yesterday. "T00:00:00Z&to=". $yesterday. "T00:00:01Z");
         createData(json_decode($covidData), $conn);
+        sleep(1);
     }
 
     // Method: POST, PUT, GET etc

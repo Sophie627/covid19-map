@@ -109,8 +109,8 @@ map.on('load', function() {
                         'property': 'ConfirmedC',
                         'type': 'exponential',
                         'stops': [
-                            [0, 1],
-                            [100000, 40]
+                            [0, 0],
+                            [100000, 40000]
                         ]
                     },
                     // increase intensity as zoom level increases
@@ -211,7 +211,7 @@ map.on('load', function() {
     $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
     $('body').delay(350).css({ 'overflow': 'visible' });
 
-    map.rotateTo(10, { duration: 15000 });
+    map.rotateTo(10, { duration: 10000 });
 
 });
 
