@@ -1,22 +1,45 @@
 //Get current date
 var yesterday = new Date();
-var dd = String(yesterday.getDate() - 1).padStart(2, '0');
-var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = yesterday.getFullYear();
+// var dd = String(yesterday.getDate() - 2).padStart(2, '0');
+// var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+// var yyyy = yesterday.getFullYear();
 
-yesterday = yyyy + '-' + mm + '-' + dd;
+// yesterday = yyyy + '-' + mm + '-' + dd;
 
-// Fetch all countries
-// var countries;
-// $.ajax({
-//     type: "GET",
-//     url: "https://api.covid19api.com/countries",
-//     success: function(data) {
-//         countries = data;
-//     },
-//     async: false,
-// });
-// console.log(countries);
+var monthDay = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+var Dates = [];
+for (var d = new Date(yesterday.getFullYear(), yesterday.getMonth() + 1, yesterday.getDate() - 2); d >= new Date(2020, 1, 22); d.setDate(d.getDate() - 1)) {
+    month = '' + (d.getMonth());
+    day = '' + d.getDate();
+    year = d.getFullYear();
+
+    if (d.getDate() > monthDay[d.getMonth()]) continue;
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+    Dates.push([year, month, day].join('-'));
+}
+
+var max = Dates.length - 1;
+
+document.getElementById('slider').setAttribute("max", "" + max);
+
+function filterBy(Date) {
+    console.log(Date);
+    console.log(Dates[Date]);
+    var Dateind = Dates[Date];
+    document.getElementById('Date').innerText = Dates[Date];
+    var filters = ['==', ['get', 'Date'], Dateind];
+    map.setFilter('covid-heat', filters);
+    // var filters2 = ['==', ['get', 'Date'], Dateind];
+    // map.setFilter('stock-extrusion', filters2);
+    // map.setFilter('px-last-labels', filters2);
+
+    // Set the label to the Date
+}
 
 mapboxgl.accessToken =
     'pk.eyJ1IjoiZmFyaGFucm9jazMyIiwiYSI6ImNrYWp1bWtmNjBhZm4yeG82OGtkMnRrdG0ifQ.lOErOt3mxT1icl2_OP7FIg';
@@ -37,14 +60,13 @@ map.on('load', function() {
     var covidData;
     $.ajax({
         type: "GET",
-        url: "https://corona-api.com/countries",
+        url: "model/ajax_map.php",
         success: function(data) {
             covidData = data;
         },
         async: false,
     });
 
-    console.log(covidData);
     if (covidData != []) {
 
         var heatmapData = {
@@ -53,22 +75,25 @@ map.on('load', function() {
             "features": [],
         };
 
-        covidData.data.forEach(element => {
-            if (element.coordinates.longitude != 0 || element.coordinates.latitude != 0) {
+        console.log(covidData);
+
+        JSON.parse(covidData).forEach(element => {
+            if (element.lon != 0 || element.lat != 0) {
+                var description = '<strong>' + element.city + ' ' + element.province + ' ' + element.country + '</strong><br>' + 'Confirmed: ' + element.confirmed;
                 heatmapData.features.push({
                     "type": "Feature",
                     "properties": {
-                        "ConfirmedC": element.latest_data.confirmed,
+                        "ConfirmedC": element.confirmed,
+                        "Date": element.date.slice(0, 10),
+                        "description": description,
                     },
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [element.coordinates.longitude, element.coordinates.latitude],
+                        "coordinates": [element.lon, element.lat],
                     }
                 });
             }
         });
-
-        console.log(heatmapData);
 
         map.addSource('covid', {
             'type': 'geojson',
@@ -86,15 +111,15 @@ map.on('load', function() {
                         'property': 'ConfirmedC',
                         'type': 'exponential',
                         'stops': [
-                            [1, 1],
-                            [1000000, 40]
+                            [0, 0],
+                            [100000, 40000]
                         ]
                     },
                     // increase intensity as zoom level increases
                     'heatmap-intensity': {
                         'stops': [
                             [0, 1],
-                            [22, 10]
+                            [40, 10]
                         ]
                     },
                     // use sequential color palette to use exponentially as the weight increases
@@ -128,10 +153,24 @@ map.on('load', function() {
                         ]
                     }
                 },
-
+                
             },
             'waterway-label'
         );
+        
+        map.addLayer({
+            'id': 'places',
+            'type': 'symbol',
+            'source': 'covid',
+            'layout': {
+                'icon-image': 'music-15',
+                'icon-allow-overlap': true,
+                'icon-size': 1,
+            },
+            'paint': {
+                'icon-opacity': 0,
+            }
+        });
 
         map.addLayer({
                 'id': 'covid-point',
@@ -175,8 +214,43 @@ map.on('load', function() {
             },
             'waterway-label'
         );
+        
+        map.on('click', 'places', function (e) {
+            
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+             
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+             
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+        map.on('mouseenter', 'places', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+         
+        map.on('mouseleave', 'places', function () {
+            map.getCanvas().style.cursor = '';
+        });
     }
 
+    filterBy(0);
+
+    document.getElementById('slider').addEventListener('input', function(e) {
+        var Dateind = parseInt(e.target.value, 10);
+        filterBy(Dateind);
+    });
+
+    $('#status').fadeOut(); // will first fade out the loading animation 
+    $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+    $('body').delay(350).css({ 'overflow': 'visible' });
 
     map.rotateTo(10, { duration: 10000 });
 

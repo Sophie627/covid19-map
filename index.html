@@ -13,21 +13,27 @@
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+        <!-- <img width="100%" src='covid.jpg' /> -->
+    </div>
+
 
     <div id="map"></div>
 
-    <div class="map-overlay left">
-        <div class="global-confirmed">
-            <h5>Global Cases</h5>
-            <div class="global-confirmed-number"></div>
-        </div>
-        <div class="country-confirmed">
-            <p>Cased by</p>
-            <p>Country/Region/Sovereignty</p>
-            <div class="country-confirmed-number">
-            </div>
-        </div>
-    </div>
+    <!--<div class="map-overlay left">-->
+    <!--    <div class="global-confirmed">-->
+    <!--        <h5>Global Cases</h5>-->
+    <!--        <div class="global-confirmed-number"></div>-->
+    <!--    </div>-->
+    <!--    <div class="country-confirmed">-->
+    <!--        <p>Cased by</p>-->
+    <!--        <p>Country/Region/Sovereignty</p>-->
+    <!--        <div class="country-confirmed-number">-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
 
     <div class="map-overlay right">
         <div class="death-recovered">
@@ -43,32 +49,14 @@
         </div>
     </div>
 
+    <div class="map-overlay slider">
+        <h3>Preview by Date</h3>
+        <p id="Date">2020-09-18</p>
+        <input id="slider" type="range" min="0" max="239" step="1" value="0" />
+    </div>
 
-    <!--
-        <div class="map-overlay top">
-          <h1 style="color: aqua">nCov19 and Economy Variation Map...</h1>
-          <h5 style="color: red">SPX Index </h5>
-          <h5 style="color: blue">AXX Index </h5>
-          <h5 style="color: yellow">SHSZ300 Index </h5>
-          <h5 style="color: brown">AS52 Index </h5>
-          <h5 style="color: orange">ITLMS Index </h5>
-          <h5 style="color: beige">CLXP Index </h5>
-          <div class="map-overlay-inner">
-            <div id='container'></div>
-          </div>
-          <div class="map-overlay-inner">
-            <h2>Preview by Date</h2>
-            <label id="Date"></label>
-            <input id="slider" type="range" min="0" max="62" step="1" value="0" />
-          </div>
-          <div class="map-overlay-inner">
-            <div id="legend" class="legend">
-                <div class="bar"></div>
-                <div><h3 style="color: darkgrey">Low __   Cornoa Virus Impact     __  High</h3></div>
-            </div>
-          </div>
-        </div>
-        -->
+
+    
     <script src="js/main.js"></script>
     <script src="js/covidChart.js"></script>
     <script src="js/covidSummary.js"></script>
