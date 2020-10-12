@@ -153,11 +153,11 @@ map.on('load', function() {
                         ]
                     }
                 },
-                
+
             },
             'waterway-label'
         );
-        
+
         map.addLayer({
             'id': 'places',
             'type': 'symbol',
@@ -214,29 +214,29 @@ map.on('load', function() {
             },
             'waterway-label'
         );
-        
-        map.on('click', 'places', function (e) {
-            
+
+        map.on('click', 'places', function(e) {
+
             var coordinates = e.features[0].geometry.coordinates.slice();
             var description = e.features[0].properties.description;
-             
+
             // Ensure that if the map is zoomed out such that multiple
             // copies of the feature are visible, the popup appears
             // over the copy being pointed to.
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-             
+
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
         });
-        map.on('mouseenter', 'places', function () {
+        map.on('mouseenter', 'places', function() {
             map.getCanvas().style.cursor = 'pointer';
         });
-         
-        map.on('mouseleave', 'places', function () {
+
+        map.on('mouseleave', 'places', function() {
             map.getCanvas().style.cursor = '';
         });
     }
